@@ -107,6 +107,8 @@ class Game(object):
 
 			self.render()
 
+			self.clock.tick(60)
+
 			pygame.display.flip()
 
 
