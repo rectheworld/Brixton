@@ -4,6 +4,18 @@ import pygame.sprite
 from animation import * 
 
 class Player(pygame.sprite.Sprite):
+	"""
+	Player Class. Creates a sprite that can be moved by the player 
+
+	Parameters
+	----------
+	inital_postion: A tuple in pixals representing where what play
+		 should first appaear on the screen 
+
+	fps: "Frams per Second". The speed at which the animation should 
+		run
+
+	"""
 	# Import Spritesheet 
 	spritesheet = Spritesheet("images/boy.png")
 
@@ -39,12 +51,17 @@ class Player(pygame.sprite.Sprite):
 
 		}
 
-		
+
 		self.direction = Player.EAST
 		self.animation = Player.STAND
 
 
-	def update(self): 
+	def update(self):
+		"""
+		Creates the animation of the player walking.
+
+		Called in process_events in main 
+		""" 
 		animation = self.animations[self.animation][self.direction]
 		animation.updates(pygame.time.get_ticks())
 		self.image = animation.frame
