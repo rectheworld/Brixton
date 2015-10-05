@@ -82,7 +82,7 @@ class Game(object):
 
 		#Collect the Keystrocks 
 		walk = False 
-		old_pos = (self.player.position[0], self.player.position[1])
+		old_pos = [self.player.position[0], self.player.position[1]]
 
 		keys = pygame.key.get_pressed()
 
@@ -123,7 +123,16 @@ class Game(object):
 		if not walk:
 			self.player.animation = self.player.STAND
 
+		
+		collosion_list = pygame.sprite.spritecollide(self.player, self.obj_map.sprite_obstical_list, False)
+
+		if len(collosion_list) > 0:
+			 self.player.position = old_pos
+			 print len(collosion_list)
+
+
 		#Update Player Variables 
+		collosion_list = [] 
 		self.player.update() 
  	
 	def render(self):

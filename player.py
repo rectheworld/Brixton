@@ -33,6 +33,8 @@ class Player(pygame.sprite.Sprite):
 		# inital the Super class of Sprite 
 		pygame.sprite.Sprite.__init__(self)
 		self.position = inital_postion
+		self.rect = pygame.Rect(self.position[0], self.position[1], 48, 48)
+
 
 		self.animations = {
 		'stand' : [

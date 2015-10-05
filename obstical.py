@@ -13,4 +13,7 @@ class Obstical(pygame.sprite.Sprite):
 		self.file_path		= file_path 
 		self.inital_postion = inital_postion
 		self.image 			= load_image(self.file_path)
+		self.rect			= self.image.get_rect()
+		self.rect.x 		= inital_postion[0]
+		self.rect.y			= inital_postion[1]
 

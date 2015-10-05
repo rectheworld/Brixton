@@ -12,7 +12,7 @@ class Obj_Map():
 		self.sprite_obstical_list 	= pygame.sprite.Group()
 		self.obstical_list = []
 
-		self.table 			= Obstical("table", "images/table.png", (48 * 3,48 * 4))
+		self.table 			= Obstical("table", "images/table.png", [48 * 3,48 * 4])
 
 		self.obstical_list.append(self.table)
 
