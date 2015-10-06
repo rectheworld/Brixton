@@ -49,7 +49,7 @@ class Game(object):
 
 		self.floor_tile		= pygame.image.load("images/wood.png").convert()
 		from player import Player
-		self.player			= Player([tile_size, tile_size])
+		self.player			= Player([self.tile_size, self.tile_size])
 
 		from obj_map import Obj_Map
 		self.obj_map 			= Obj_Map()
@@ -158,8 +158,8 @@ class Game(object):
 			row = 0
 			while row <= self.screen_size[1]:
 				self.screen.blit(self.floor_tile, (col, row))
-				row += tile_size
-			col += tile_size
+				row += self.tile_size
+			col += self.tile_size
 
 		#Render the Obsticals 
 		for obj in self.obj_map.obstical_list:
