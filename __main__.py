@@ -49,7 +49,7 @@ class Game(object):
 
 		self.floor_tile		= pygame.image.load("images/wood.png").convert()
 		from player import Player
-		self.player			= Player([self.tile_size, self.tile_size])
+		self.player			= Player([self.tile_size  * 6, self.tile_size * 4])
 
 		from obj_map import Obj_Map
 		self.obj_map 			= Obj_Map()

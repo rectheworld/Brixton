@@ -48,7 +48,14 @@ class Obj_Map():
 		self.ceiling9			= Obstical("ceiling", "images/ceiling.png", [tile_size * (14 - 1), tile_size * (9 - 1)])
 		self.ceiling10			= Obstical("ceiling", "images/ceiling.png", [tile_size * (14 - 1), tile_size * (10 - 1)])
 
+		# Long Table 
+		self.long_table			= Obstical("long_table", "images/long_table.png", [tile_size * (6 - 1), tile_size * (6 -1)])
 
+		# Bar
+		self.bar			= Obstical("bar", "images/bar_front.png", [tile_size * (2 - 1), tile_size * (2 -1)])
+		self.bar_left		= Obstical("bar_left", "images/bar_left.png", [tile_size * (2 - 1), tile_size * (2 -1)])
+		self.bar_right		= Obstical("bar_right", "images/bar_right.png", [tile_size * (9 - 1), tile_size * (2 -1)])		
+		
 		# Add objects to a list of obsticals 
 		self.obstical_list.append(self.table1)
 		self.obstical_list.append(self.table2)
@@ -79,13 +86,25 @@ class Obj_Map():
 		self.obstical_list.append(self.ceiling9)
 		self.obstical_list.append(self.ceiling10)
 
+		self.obstical_list.append(self.long_table)
+
+		self.obstical_list.append(self.bar)
+		self.obstical_list.append(self.bar_left)
+		self.obstical_list.append(self.bar_right)
+
 
 
 		# Make the collison rects for the table a little bit smaller than 48 x 48 so the 
-		# layer can walk between the tables 
+		# layer can walk between the tables and in front of them
+		# Ie the collision rect only covers to top semi circle of the table 
+		# Bar needs to be adjusted too 
 		for obj in self.obstical_list:
 			if obj.obstical_type == "table":
-				obj.rect = (obj.inital_postion[0] + 7, obj.inital_postion[1] + 7, 34, 34)
+				obj.rect = (obj.inital_postion[0] + 7, obj.inital_postion[1] + 7, 34, 10) 
+			elif obj.obstical_type == "long_table":
+				obj.rect = (obj.inital_postion[0] + 7, obj.inital_postion[1] + 7, 34, 154) 
+			elif obj.obstical_type== "bar":
+				obj.rect = (obj.inital_postion[0] + 5, obj.inital_postion[1] + tile_size - 5, (tile_size * 8) - 5, tile_size - 25)				
 
 
 
@@ -104,6 +123,12 @@ class Obj_Map():
 		self.sprite_obstical_list.add(self.patio_pillar8)
 		self.sprite_obstical_list.add(self.patio_bar9)
 		self.sprite_obstical_list.add(self.patio_bar10)
+
+		self.sprite_obstical_list.add(self.long_table)
+
+		self.sprite_obstical_list.add(self.bar)
+		self.sprite_obstical_list.add(self.bar_left)
+		self.sprite_obstical_list.add(self.bar_right)
 
 
 	def render_map():
