@@ -35,6 +35,9 @@ class Game(object):
 		#Creates the Pygame Screen object 
 		self.screen 		= pygame.display.set_mode(self.screen_size)
 
+		# size of Exch tile in the grid
+		self.tile_size		= 48
+
 		# Creates the clock that allows to the game to be animated 
 		self.clock 			= pygame.time.Clock()
 		
@@ -46,7 +49,7 @@ class Game(object):
 
 		self.floor_tile		= pygame.image.load("images/wood.png").convert()
 		from player import Player
-		self.player			= Player([48,48])
+		self.player			= Player([tile_size, tile_size])
 
 		from obj_map import Obj_Map
 		self.obj_map 			= Obj_Map()
@@ -123,16 +126,17 @@ class Game(object):
 		if not walk:
 			self.player.animation = self.player.STAND
 
+		self.player.rect.x = self.player.position[0]
+		self.player.rect.y = self.player.position[1]
+
 		
 		collosion_list = pygame.sprite.spritecollide(self.player, self.obj_map.sprite_obstical_list, False)
 
 		if len(collosion_list) > 0:
 			 self.player.position = old_pos
-			 print len(collosion_list)
-
 
 		#Update Player Variables 
-		collosion_list = [] 
+
 		self.player.update() 
  	
 	def render(self):
@@ -154,8 +158,8 @@ class Game(object):
 			row = 0
 			while row <= self.screen_size[1]:
 				self.screen.blit(self.floor_tile, (col, row))
-				row += 48
-			col += 48
+				row += tile_size
+			col += tile_size
 
 		#Render the Obsticals 
 		for obj in self.obj_map.obstical_list:
