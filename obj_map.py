@@ -55,6 +55,12 @@ class Obj_Map():
 		self.bar			= Obstical("bar", "images/bar_front.png", [tile_size * (2 - 1), tile_size * (2 -1)])
 		self.bar_left		= Obstical("bar_left", "images/bar_left.png", [tile_size * (2 - 1), tile_size * (2 -1)])
 		self.bar_right		= Obstical("bar_right", "images/bar_right.png", [tile_size * (9 - 1), tile_size * (2 -1)])		
+
+		# DJ botth 
+		self.dj_booth		= Obstical("dj_booth", "images/dj_booth.png", [tile_size * (2 - 1), tile_size * (9 -1)])
+
+		# Exit 
+		self.exit_door		= Obstical("exit_door", "images/exit.png", [tile_size * (1 - 1), tile_size * (4 -1)])		
 		
 		# Add objects to a list of obsticals 
 		self.obstical_list.append(self.table1)
@@ -92,6 +98,9 @@ class Obj_Map():
 		self.obstical_list.append(self.bar_left)
 		self.obstical_list.append(self.bar_right)
 
+		self.obstical_list.append(self.dj_booth)
+
+		self.obstical_list.append(self.exit_door)
 
 
 		# Make the collison rects for the table a little bit smaller than 48 x 48 so the 
@@ -129,6 +138,8 @@ class Obj_Map():
 		self.sprite_obstical_list.add(self.bar)
 		self.sprite_obstical_list.add(self.bar_left)
 		self.sprite_obstical_list.add(self.bar_right)
+
+		self.sprite_obstical_list.add(self.dj_booth)
 
 
 	def render_map():
