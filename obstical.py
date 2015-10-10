@@ -17,3 +17,4 @@ class Obstical(pygame.sprite.Sprite):
 		self.rect.x 		= inital_postion[0]
 		self.rect.y			= inital_postion[1]
 
+

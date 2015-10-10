@@ -1,5 +1,7 @@
 import pygame 
 from obstical import Obstical
+from npc import NPC
+from spritesheet import Spritesheet 
 
 tile_size = 48
 class Obj_Map():
@@ -11,8 +13,8 @@ class Obj_Map():
 	def __init__(self):
 
 		self.sprite_obstical_list 	= pygame.sprite.Group()
-		self.obstical_list = []
-
+		self.obstical_list 			= []
+		self.npc_list				= [] 
 		# Create Obbjects
 		#Bathrooms
 		self.table1 			= Obstical("table", "images/table.png", [tile_size * (11 - 1),tile_size * (4 -1)])
@@ -62,6 +64,15 @@ class Obj_Map():
 		# Exit 
 		self.exit_door		= Obstical("exit_door", "images/exit.png", [tile_size * (1 - 1), tile_size * (4 -1)])		
 		
+
+		####################
+		#CREATE SOME NPCS
+		####################
+
+		# Create a girl
+		self.girl1 			= NPC("girl", "images/girl.png", [tile_size * (7 - 1), tile_size * (7 -1)])
+
+		
 		# Add objects to a list of obsticals 
 		self.obstical_list.append(self.table1)
 		self.obstical_list.append(self.table2)
@@ -102,6 +113,9 @@ class Obj_Map():
 
 		self.obstical_list.append(self.exit_door)
 
+		# Add npcs to npc list 
+		self.npc_list.append(self.girl1)
+
 
 		# Make the collison rects for the table a little bit smaller than 48 x 48 so the 
 		# layer can walk between the tables and in front of them
@@ -140,6 +154,8 @@ class Obj_Map():
 		self.sprite_obstical_list.add(self.bar_right)
 
 		self.sprite_obstical_list.add(self.dj_booth)
+
+		self.sprite_obstical_list.add(self.girl1)
 
 
 	def render_map():

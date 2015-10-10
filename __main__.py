@@ -165,6 +165,10 @@ class Game(object):
 		for obj in self.obj_map.obstical_list:
 			self.screen.blit(obj.image, obj.inital_postion)
 
+		# Render the npcs 
+		for npc in self.obj_map.npc_list:
+			self.screen.blit(npc.image, npc.postion)
+
 
 		# render the player 
 		self.screen.blit(self.player.image, self.player.position)
