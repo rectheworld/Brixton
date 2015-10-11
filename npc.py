@@ -3,10 +3,13 @@ import pygame.sprite
 from spritesheet import Spritesheet
 from animation import Animation
 
+# dont know if this is nessasary 
+from text_display import Text_Display 
+
 def load_image(filename):
 	return pygame.image.load(filename).convert()
 
-class NPC(pygame.sprite.Sprite, Spritesheet):
+class NPC(pygame.sprite.Sprite):
 
 	
 
@@ -20,16 +23,18 @@ class NPC(pygame.sprite.Sprite, Spritesheet):
 	STAND = 'stand'
 	WALK = 'walk'
 	
-	def __init__(self, obstical_type , file_path, inital_postion):
+	def __init__(self, obstical_type , file_path, inital_position):
 		pygame.sprite.Sprite.__init__(self)
-		self.postion 		= inital_postion
+		self.position 		= inital_position
 		fps 				= 15 
 		self.obstical_type 	= obstical_type
 		self.file_path		= file_path
 		self.spritesheet 	= Spritesheet(self.file_path)
 		# Size of rect for the first girl i found, this might be a parameter later 
-		self.rect = pygame.Rect(self.postion[0], self.postion[1], 40, 20)
+		self.rect 			= pygame.Rect(self.position[0], self.position[1], 40, 20)
+		self.radius 		= 30 
 
+		self.speak			= Text_Display("This Drink Tastes Gross")
 		self.animations = {
 		'stand' : [
 			Animation(self.spritesheet, fps, [(50,   0, 48, 48),]),
@@ -54,16 +59,31 @@ class NPC(pygame.sprite.Sprite, Spritesheet):
 		animation.updates(pygame.time.get_ticks())
 		self.image = animation.frame
 
+	def turn_towards_player(self, player_position):
+	# These direction are not great yet, should probly be in npc as a function 	
+		if player_position[0] < self.position[0]:
+			self.direction = NPC.WEST 
+			self.animation = NPC.STAND
+		elif player_position[0] > self.position[0]:
+			self.direction = NPC.EAST 
+			self.animation = NPC.STAND
+		elif player_position[1] < self.position[1]:
+			self.direction = NPC.NORTH 
+			self.animation = NPC.STAND
+		elif player_position[1] > self.position[1]:
+			self.direction = NPC.SOUTH 
+			self.animation = NPC.STAND
+		self.update()
 
-		def update(self):
-			"""
-			Creates the animation of the npc occolating.
+	def update(self):
+		"""
+		Creates the animation of the npc occolating.
 
-			Called in process_events in main 
-			""" 
-			animation = self.animations[self.animation][self.direction]
-			animation.updates(pygame.time.get_ticks())
-			self.image = animation.frame
-			self.rect = animation.rect
-			self.rect.x = self.position[0]
-			self.rect.y = self.position[1]
+		Called in process_events in main 
+		""" 
+		animation = self.animations[self.animation][self.direction]
+		animation.updates(pygame.time.get_ticks())
+		self.image = animation.frame
+		#self.rect = animation.rect
+		self.rect.x = self.position[0]
+		self.rect.y = self.position[1]

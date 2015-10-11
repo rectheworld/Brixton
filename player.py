@@ -33,7 +33,11 @@ class Player(pygame.sprite.Sprite):
 		# inital the Super class of Sprite 
 		pygame.sprite.Sprite.__init__(self)
 		self.position = inital_postion
+		
+		# Rect is used to test for clissions with objects 
 		self.rect = pygame.Rect(self.position[0], self.position[1], 48, 48)
+		# Radious id used to test if the player is withing talking distance with the npcs 
+		self.radius = 30 
 
 
 		self.animations = {

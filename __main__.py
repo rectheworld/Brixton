@@ -6,6 +6,9 @@
 
 import pygame
 from pygame import *
+from npc import NPC 
+
+
 
 
 FPS = 60
@@ -53,6 +56,10 @@ class Game(object):
 
 		from obj_map import Obj_Map
 		self.obj_map 			= Obj_Map()
+
+		# this is text that is spoken at the next render 
+		self.interaction	= False
+		self.npc_active		= None 
 
 	def difference(self, tuple_1, tuple_2):
 		"""
@@ -123,8 +130,23 @@ class Game(object):
 			self.player.animation = self.player.WALK
 			walk = True
 
+		if keys[K_x]:
+			for npc in self.obj_map.npc_list:
+				if pygame.sprite.collide_circle(self.player, npc):
+					self.interaction	 = True
+					self.npc_active 	 = npc 
+					npc.turn_towards_player(self.player.position)
+					self.speak_next = npc.speak.label
+
+
 		if not walk:
 			self.player.animation = self.player.STAND
+		if walk:
+			#Just going to hijack this function 
+			if self.npc_active != None: 
+				self.npc_active.turn_towards_player((self.npc_active.position[0], self.npc_active.position[1] + 10))
+			self.interaction	 = False
+			self.npc_active		= None 
 
 		self.player.rect.x = self.player.position[0]
 		self.player.rect.y = self.player.position[1]
@@ -167,7 +189,7 @@ class Game(object):
 
 		# Render the npcs 
 		for npc in self.obj_map.npc_list:
-			self.screen.blit(npc.image, npc.postion)
+			self.screen.blit(npc.image, npc.position)
 
 
 		# render the player 
@@ -202,6 +224,9 @@ class Game(object):
 
 
 			self.render()
+
+			if self.interaction == True:
+				self.screen.blit(self.npc_active.speak.label, (100,100))
 
 			self.clock.tick(60)
 
