@@ -59,10 +59,10 @@ class Obj_Map():
 		self.bar_right		= Obstical("bar_right", "images/bar_right.png", [tile_size * (9 - 1), tile_size * (2 -1)])		
 
 		# DJ botth 
-		self.dj_booth		= Obstical("dj_booth", "images/dj_booth.png", [tile_size * (2 - 1), tile_size * (9 -1)])
+		self.dj_booth		= Obstical("dj_booth", "images/dj_booth.png", [tile_size * (2 - 1), tile_size * (9 - 1)])
 
 		# Exit 
-		self.exit_door		= Obstical("exit_door", "images/exit.png", [tile_size * (1 - 1), tile_size * (4 -1)])		
+		self.exit_door		= Obstical("exit_door", "images/exit.png", [tile_size * (1 - 1), tile_size * (4 - 1)])		
 		
 
 		####################
@@ -70,7 +70,10 @@ class Obj_Map():
 		####################
 
 		# Create a girl
-		self.girl1 			= NPC("girl", "images/girl.png", [tile_size * (7 - 1), tile_size * (7 -1)])
+		self.girl1 			= NPC("girl", "images/girl.png", [tile_size * (7 - 1), tile_size * (7 - 1)])
+
+		#Bartender 
+		self.bartender      =NPC("bartender", "images/bar_tender.png", [tile_size * (7 -1), tile_size * (2 - 1)]) 
 
 		
 		# Add objects to a list of obsticals 
@@ -115,6 +118,7 @@ class Obj_Map():
 
 		# Add npcs to npc list 
 		self.npc_list.append(self.girl1)
+		self.npc_list.append(self.bartender)
 
 
 		# Make the collison rects for the table a little bit smaller than 48 x 48 so the 
@@ -156,7 +160,7 @@ class Obj_Map():
 		self.sprite_obstical_list.add(self.dj_booth)
 
 		self.sprite_obstical_list.add(self.girl1)
-
+		self.sprite_obstical_list.add(self.bartender)
 
 	def render_map():
 		pass 

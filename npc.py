@@ -5,6 +5,7 @@ from animation import Animation
 
 # dont know if this is nessasary 
 from text_display import Text_Display 
+from quest import Quest 
 
 def load_image(filename):
 	return pygame.image.load(filename).convert()
@@ -34,7 +35,12 @@ class NPC(pygame.sprite.Sprite):
 		self.rect 			= pygame.Rect(self.position[0], self.position[1], 40, 20)
 		self.radius 		= 30 
 
-		self.speak			= Text_Display("This Drink Tastes Gross")
+		self.quest 			= Quest(obstical_type)
+		# self..quest.speakables = [
+		# 		"This Drink Tastes Gross"
+		# ] 
+
+		self.speak			= Text_Display(self.quest.speakables[0])
 		self.animations = {
 		'stand' : [
 			Animation(self.spritesheet, fps, [(50,   0, 48, 48),]),
@@ -58,6 +64,9 @@ class NPC(pygame.sprite.Sprite):
 		animation = self.animations[self.animation][self.direction]
 		animation.updates(pygame.time.get_ticks())
 		self.image = animation.frame
+
+
+
 
 	def turn_towards_player(self, player_position):
 	# These direction are not great yet, should probly be in npc as a function 	

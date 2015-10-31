@@ -61,6 +61,9 @@ class Game(object):
 		self.interaction	= False
 		self.npc_active		= None 
 
+		self.speech_box		= pygame.image.load("images/text_box.png").convert()
+		self.speech_box.set_colorkey((255,255,255), pygame.RLEACCEL)
+
 	def difference(self, tuple_1, tuple_2):
 		"""
 		Used to create smooth animation movement 
@@ -226,7 +229,9 @@ class Game(object):
 			self.render()
 
 			if self.interaction == True:
-				self.screen.blit(self.npc_active.speak.label, (100,100))
+				#pygame.draw.rect(self.screen, (255,255,255),(100,100, 100, 50))
+				self.screen.blit(self.speech_box, (200,400))
+				self.screen.blit(self.npc_active.speak.label, (240,420))
 
 			self.clock.tick(60)
 
