@@ -40,7 +40,8 @@ class NPC(pygame.sprite.Sprite):
 		# 		"This Drink Tastes Gross"
 		# ] 
 
-		self.speak			= Text_Display(self.quest.speakables[0])
+		self.speak			= Text_Display(self.quest.speak)
+
 		self.animations = {
 		'stand' : [
 			Animation(self.spritesheet, fps, [(50,   0, 48, 48),]),
@@ -96,3 +97,8 @@ class NPC(pygame.sprite.Sprite):
 		#self.rect = animation.rect
 		self.rect.x = self.position[0]
 		self.rect.y = self.position[1]
+
+	def action_advance(self):
+		self.quest.progress_quest()
+		self.speak = Text_Display(self.quest.speak)
+		return self.speak 

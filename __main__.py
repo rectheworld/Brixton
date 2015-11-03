@@ -142,12 +142,16 @@ class Game(object):
 					self.speak_next = npc.speak.label
 
 
+
 		if not walk:
 			self.player.animation = self.player.STAND
 		if walk:
 			#Just going to hijack this function 
 			if self.npc_active != None: 
 				self.npc_active.turn_towards_player((self.npc_active.position[0], self.npc_active.position[1] + 10))
+
+				# You've just talked to an NPC, the next line of code advances the speak she says to you 
+				self.npc_active.action_advance()
 			self.interaction	 = False
 			self.npc_active		= None 
 

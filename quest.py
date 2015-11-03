@@ -10,6 +10,7 @@ class Quest():
 
 		self.speakables = []
 
+
 		self.has_beer	= False
 
 		if npc_type == "girl":
@@ -17,12 +18,25 @@ class Quest():
 		elif npc_type == "bartender":
 			self.bartender()
 
+		self.speak_index = 0
+		self.speak = self.speakables[self.speak_index]
+
 	def quest_1(self):
 		self.speakables = [
-				"This Drink Tastes Gross"
+				"This Drink Tastes Gross",
+				"Why are you still here?"
 		] 
 
 	def bartender(self):
 		self.speakables = [
-		"What'll it be?"
+		"Heres a Beer"
 		]
+
+	def progress_quest(self):
+		print self.speak_index, len(self.speakables)
+		if self.speak_index < len(self.speakables) - 1:
+			self.speak_index += 1
+			self.speak = self.speakables[self.speak_index]
+			print self.speak 
+			return self.speak
+			
